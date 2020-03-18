@@ -1,3 +1,4 @@
+const path=require('path')
 var express = require('express')
 var app = express()
 
@@ -10,5 +11,5 @@ app.listen(3000, function () {
 })
 
 app.use(function (req, res, next) {
-  res.status(404).send("Sorry can't find that!")
+  res.status(404).sendFile(path.resolve(__dirname,'../../client/404.html'))
 })
