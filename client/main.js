@@ -1,26 +1,51 @@
 const axios = require("axios");
 
-axios({
-    "method":"GET",
-    "url":"https://montanaflynn-fifa-world-cup.p.rapidapi.com/teams",
-    "headers":{
-    "content-type":"application/octet-stream",
-    "x-rapidapi-host":"montanaflynn-fifa-world-cup.p.rapidapi.com",
-    "x-rapidapi-key":"948ca828c0mshe8fd4cb616ef4afp1372fbjsnd5c9fcc4115c",
-    "accepts":"json"
-    }
+console.log('Avant le lancement de la requête')
+
+function getFifaTeamsPromises () {
+    axios({
+        "method":"GET",
+        "url":"https://montanaflynn-fifa-world-cup.p.rapidapi.com/teams",
+        "headers":{
+            "content-type":"application/octet-stream",
+            "x-rapidapi-host":"montanaflynn-fifa-world-cup.p.rapidapi.com",
+            "x-rapidapi-key":"c31087da0dmsha1530a723bea0a2p1dbfdfjsn18f43cedb6fd",
+            "accepts":"json"
+        }
     })
     .then((response)=>{
-      console.log(response)
-      var teams =response.data
-      var html=''
-      for (team of teams){
-          html+=team.id + ' '+team.title+ '<br />'
-      }
-      document.querySelector('#result').innerHTML=html
+        console.log('Requête retournée sans erreur')
+        var teams = response.data
+        console.log(teams)
+        useTeamsData(teams)
     })
     .catch((error)=>{
-      console.log('Requete retourné avec erreur')
-      console.log(error)
+        console.log('Requête retournée avec erreur')
+        console.log(error)
     })
-    console.log('Apres le code de la requete')
+}
+
+
+function useTeamsData (teams) {
+    var ul = createUL()
+    for (var team of teams) {
+        var text = team.id + ' ' + team.title
+        var li = createLI(text)
+        ul.appendChild(li)
+    }
+    document.querySelector('#results').appendChild(ul)
+}
+
+function createUL () {
+    return document.createElement('ul')
+}
+
+function createLI (text) {
+    var li = document.createElement('li')
+    li.innerHTML = text
+    return li
+}
+
+getFifaTeamsPromises()
+
+console.log('Après le code de la requête')
