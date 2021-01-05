@@ -21,7 +21,7 @@
   },
   "homepage": "https://github.com/Thibault-ri/Projet-1-WebDev#readme",
   "dependencies": {
-    "axios": "^0.19.2",
+    "axios": "^0.21.1",
     "parcel-bundler": "^1.12.4",
     "surge": "^0.21.3"
   }
